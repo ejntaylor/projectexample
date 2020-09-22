@@ -42,7 +42,7 @@ return [
 
         'main' => [
             'method' => 'token',
-            'token' => '3a55f5b680a3eab7673106e8f45e8b0f447a83f2',
+            'token' => 'xx',
             // 'backoff'    => false,
             // 'cache'      => false,
             // 'version'    => 'v3',
