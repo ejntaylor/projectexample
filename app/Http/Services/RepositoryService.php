@@ -15,9 +15,7 @@ class RepositoryService
 
     public function getUser($token)
     {
-
         return $this->github->getFactory()->make(['token' => $token, 'method' => 'token']);
-
     }
 
     public function getUsersStarredRepos($token)
