@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div class="pb-5">
         <b-alert :show="this.sent">Sent</b-alert>
 
-        <b-form @submit="handleForm" class="py-5" v-if="!this.sent">
+        <h4>Token Form</h4>
+        <b-form @submit="handleForm" v-if="!this.sent" class="py-3">
             <b-form-group
                 id="input-group-1"
                 label="Github Token:"

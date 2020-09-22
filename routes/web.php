@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RepositoryController;
 use App\Http\Controllers\TokenController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 // Token
 Route::post('/token', [TokenController::class, 'store'])->name('tokens.store');
+
+// Starred Repos
+Route::post('/starred-repos', [RepositoryController::class, 'fetch'])->name('starred-repos');
