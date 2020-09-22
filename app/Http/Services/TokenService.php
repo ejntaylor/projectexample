@@ -13,6 +13,7 @@ class TokenService
 
     public function storeToken(TokenRequest $request)
     {
+
         return Auth::user()->fill([
             'gh_token_id' => Crypt::encryptString($request->gh_token_id),
         ])->save();
@@ -24,7 +25,7 @@ class TokenService
         return $this->decryptToken($user->gh_token_id);
     }
 
-    private function decryptToken($value)
+    public function decryptToken($value)
     {
         try {
             return Crypt::decryptString($value);
