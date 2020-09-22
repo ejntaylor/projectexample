@@ -35,8 +35,6 @@ export default {
     methods: {
         handleForm(e) {
             e.preventDefault();
-            console.log("form" + this.form.token);
-
             this.$inertia
                 .post(this.$route("tokens.store"), this.form)
                 .then(() => (this.sent = true));
