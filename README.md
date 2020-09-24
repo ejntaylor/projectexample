@@ -1,61 +1,67 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+The business story to complete
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+We try to write our stories in Gherkin so I will do that below. It does not mean you need to turn this into a test
 
-## About Laravel
+Feature: Github API Integration
+As a user of the site
+I want to add my github token to a form
+So I can then see my starred repos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Scenario: User can log in
+Given I view the home page
+Then I should see a login button
+And when I click that then I should be logged in
+And redirected back to the home page
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+###
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# This form will be vuejs
 
-## Learning Laravel
+# this form will live in the home page when authenticated
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# this form will use axios
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# The form will use https://bootstrap-vue.js.org/
 
-## Laravel Sponsors
+###
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Scenario: Form on Home page to add my Github token
+Given I am logged in
+Then I can add my github token to a form
+And click save
+Then it will be encrypted in the database in the user table \***\*Then\*\*** the home page will show that token decrypted
+And if the token is null it will say "No Token? Click here to learn how to make token"
+And it will link in a new tab to github docs so user knows how to make a token
 
-### Premium Partners
+###
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+# This button will be vuejs
 
-## Contributing
+# it will be a separate component from above
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# The button and list will use https://bootstrap-vue.js.org/
 
-## Code of Conduct
+# Using this library to help with the work
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# https://github.com/KnpLabs/php-github-api/blob/master/doc/users.md#get-repos-that-a-specific-user-is-watching
 
-## Security Vulnerabilities
+# There is a Laravel friendly version of it
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# https://github.com/GrahamCampbell/Laravel-GitHub
 
-## License
+###
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Scenario: Press button to get starred repos
+Given I am logged in
+And I setup my token
+Then I will see a button to get starred repos
+And if I have not set my token this will be grayed out
+And if I click that it will say "Getting your data" while it makes the request
+And axios will make a request to a protected api route on our app that then will call github to get the data
+And when it gets the starred repos it will show them on the home page
+
+Scenario: Dealing with 500 or bad token
+Given I am logged in
+And my token is setup
+And I click Get data but the token is no longer valid
+Then I should see a bootvuejs Toast message letting me know the error
